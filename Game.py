@@ -1,3 +1,4 @@
+from time import sleep
 import pygame
 import random
 from enum import Enum
@@ -20,7 +21,7 @@ class Colors:
     LIGHTBLUE = (0, 150, 255)
 
 Point = namedtuple('Point', 'x, y')
-font = pygame.font.Font('NotoSans-Regular.ttf', 20)
+font = pygame.font.Font('assets/NotoSans-Regular.ttf', 20)
 
 
 BLOCK_SIZE = 20
@@ -71,13 +72,13 @@ class SnakeGame:
                 quit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP and self.direction != Directions.DOWN:
                     self.direction = Directions.UP
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN and self.direction != Directions.UP:
                     self.direction = Directions.DOWN
-                elif event.key == pygame.K_LEFT:
+                elif event.key == pygame.K_LEFT and self.direction != Directions.RIGHT:
                     self.direction = Directions.LEFT
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT and self.direction != Directions.LEFT:
                     self.direction = Directions.RIGHT
 
         # Moving ahead 
@@ -101,7 +102,7 @@ class SnakeGame:
 
         if new_increment > self.increments:
             self.increments = new_increment
-            self.speed += 1
+            self.speed += 2
 
         self._update_ui()
         self.clock.tick(self.speed)
@@ -161,5 +162,5 @@ if __name__ == "__main__":
             break
 
     print(f'Game over! Your score is {score}')
-
+    sleep(10)
     pygame.quit()
