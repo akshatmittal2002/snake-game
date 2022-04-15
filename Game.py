@@ -160,7 +160,7 @@ class MAIN_GAME:
             # self.snake.direction = Vector2(1,0)
             # self.snake.game_over = False
             pygame.quit()
-            quit()
+            sys.exit()
 
     def draw_grass(self):
         grass_color=(167,255,70)
